@@ -2,13 +2,11 @@ package com.gridnine.testing.rules;
 
 import com.gridnine.testing.Flight;
 
+import java.util.List;
+
 public abstract class Rule {
 
-    Flight flight;
 
-    Rule(Flight flight){
-        this.flight = flight;
-    }
-
-    public abstract boolean abilityToBeRightly();
+    public abstract boolean abilityToBeRightly(Flight flight);
+    public abstract List<Flight> filterListFlight(List<Flight> flightList);
 }

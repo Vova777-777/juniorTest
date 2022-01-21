@@ -6,10 +6,7 @@ import com.gridnine.testing.rules.RuleTimeOnLandMoreThanNecessary;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class Main {
     //        Поместите в main() такой проверочный код. Исключите из тестового набора перелёты по следующим правилам
@@ -19,9 +16,6 @@ public class Main {
 //        3.	общее время, проведённое на земле превышает два часа (время на земле — это интервал между прилётом
 //        одного сегмента и вылетом следующего за ним)
 
-    public List creteList(){
-        return new ArrayList();
-    }
 
     public static void main(String[] args) {
         List<Flight> list = FlightBuilder.createFlights();

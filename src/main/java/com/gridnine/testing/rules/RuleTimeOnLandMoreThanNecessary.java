@@ -4,30 +4,37 @@ import com.gridnine.testing.Flight;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RuleTimeOnLandMoreThanNecessary extends Rule {
 
-    Flight flight;
+
     Duration duration;
 
-    public RuleTimeOnLandMoreThanNecessary(Flight flight, Duration duration){
-        super(flight);
+    public RuleTimeOnLandMoreThanNecessary(Duration duration){
         this.duration = duration;
     }
 
-    @Override
-    public boolean abilityToBeRightly() {
-        return duration.compareTo(computeAndGetDurationOnLandBetweenSegments()) < 0;
+    public List<Flight> filterListFlight(List<Flight> flightList){
+        List<Flight> resultList = flightList.stream().filter(flight -> !this.abilityToBeRightly(flight)).
+                collect(Collectors.toList());
+        return resultList;
     }
 
-    public Duration computeAndGetDurationOnLandBetweenSegments(){
+    @Override
+    public boolean abilityToBeRightly(Flight flight) {
+        return duration.compareTo(computeAndGetDurationOnLandBetweenSegments(flight)) < 0;
+    }
+
+    public Duration computeAndGetDurationOnLandBetweenSegments(Flight flight){
         LocalDateTime arrivalTimePreviousSegment;
         LocalDateTime departureTimeNextSegment;
         Duration resultDuration = Duration.ofSeconds(0);
         Duration durationBetweenSegments;
         for (int i = 0; i < flight.getSegments().size() - 1; i++){
-            arrivalTimePreviousSegment = flight.getSegments().get(i).getDepartureDate();
-            departureTimeNextSegment = flight.getSegments().get(i + 1).getArrivalDate();
+            arrivalTimePreviousSegment = flight.getSegments().get(i).getArrivalDate();
+            departureTimeNextSegment = flight.getSegments().get(i + 1).getDepartureDate();
             durationBetweenSegments = Duration.between(arrivalTimePreviousSegment, departureTimeNextSegment);
             resultDuration = resultDuration.plus(durationBetweenSegments);
         }
