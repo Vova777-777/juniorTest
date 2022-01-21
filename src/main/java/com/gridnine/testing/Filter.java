@@ -7,12 +7,13 @@ import java.util.stream.Collectors;
 
 public class Filter {
     List<Flight> flightList;
-    Filter(List<Flight> flightList){
+    public Filter(List<Flight> flightList){
         this.flightList = flightList;
     }
-
-    public void filterFlight(Rule rule){
-     List<Flight> resultList = flightList.stream().filter(flight -> rule.abilityToBeRightly()).
-             collect(Collectors.toList());
+    public void filterFlight(Rule ... rules){
+        for (Rule rule : rules) {
+            List<Flight> resultList = flightList.stream().filter(flight -> !rule.abilityToBeRightly()).
+                    collect(Collectors.toList());
+        }
     }
 }
