@@ -6,13 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RuleFlightBeforeNow extends Rule {
-
-    List<Flight> flightList;
-
-    public RuleFlightBeforeNow(List<Flight> flightList) {
-        this.flightList = flightList;
-    }
+public class RuleFlightBeforeNow implements AbleConfirmRule {
 
     public List<Flight> filterListFlight(List<Flight> flightList){
         return flightList.stream().filter(flight -> !this.abilityToBeRightly(flight)).

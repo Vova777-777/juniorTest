@@ -7,6 +7,7 @@ import com.gridnine.testing.rules.RuleTimeOnLandMoreThanNecessary;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Main {
     //        Поместите в main() такой проверочный код. Исключите из тестового набора перелёты по следующим правилам
@@ -24,7 +25,7 @@ public class Main {
 
 
         Filter filter = new Filter(list);
-        list = filter.filterFlight(new RuleFlightBeforeNow(list));
+        list = filter.filterFlight(new RuleFlightBeforeNow());
         System.out.println("Flights after filtration per flight before now: " + "\n" +list.toString() +
                 "\n" + "Size of list = " + list.size() + "\n");
 
@@ -38,8 +39,9 @@ public class Main {
         System.out.println("Flights after filtration per time on land more than necessary: " + "\n" +list.toString() +
                 "\n" + "Size of list = " + list.size() + "\n");
 
+
         list = FlightBuilder.createFlights();
-        list = filter.filterFlight(new RuleFlightBeforeNow(list),
+        list = filter.filterFlight(new RuleFlightBeforeNow(),
                 new RuleDepartureBeforeArrival(),new RuleTimeOnLandMoreThanNecessary(Duration.ofHours(2)));
         System.out.println("Flights after filtration per all rules" + "\n" +list.toString() +
                 "\n" + "Size of list = " + list.size() + "\n");

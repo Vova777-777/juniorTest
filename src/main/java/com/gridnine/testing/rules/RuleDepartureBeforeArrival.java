@@ -6,7 +6,7 @@ import com.gridnine.testing.Segment;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RuleDepartureBeforeArrival extends Rule {
+public class RuleDepartureBeforeArrival implements AbleConfirmRule {
 
     public List<Flight> filterListFlight(List<Flight> flightList){
         return flightList.stream().filter(flight -> !this.abilityToBeRightly(flight)).

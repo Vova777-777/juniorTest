@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RuleTimeOnLandMoreThanNecessary extends Rule {
+public class RuleTimeOnLandMoreThanNecessary implements AbleConfirmRule {
 
 
     Duration duration;
